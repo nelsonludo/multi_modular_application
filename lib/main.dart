@@ -110,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Column(children: <Widget>[
               FloatingActionButton(
-                onPressed: _displayPage,
+                onPressed: () => _displayPage("To Do"),
                 tooltip: 'To Do List',
                 child: Text("To Do List"),
               )
