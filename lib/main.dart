@@ -33,7 +33,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _page = "Home";
+
   var _taskList = ["Change the light bulbs", "beat my meat"];
+
   void _displayPage(String value) {
     setState(() {
       _page = value;
@@ -47,13 +49,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _deleteTask(String value) {
-    _taskList = [
-      ...(_taskList).map((task) {
-        if (task != value) {
-          return task;
-        }
-      })
-    ];
+    setState(() {
+      _taskList = _taskList.where((task) => task != value).toList();
+    });
   }
 
   @override
