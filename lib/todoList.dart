@@ -22,7 +22,7 @@ class MyToDoList extends StatelessWidget {
               ElevatedButton(
                   onPressed: deleteTaskFunction(task), child: Text("Delete"))
             ]);
-          }).toList(),
+          }),
           FloatingActionButton(
             onPressed: () => addTaskFunction("do the laundry"),
             tooltip: 'Add Task',
