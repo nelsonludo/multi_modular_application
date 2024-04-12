@@ -33,7 +33,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _page = "Home";
-
+  String _newTask = "";
+  bool _displayAddTaskPanel = false;
   var _taskList = ["Change the light bulbs", "beat my meat"];
 
   void _displayPage(String value) {
@@ -43,14 +44,28 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _addTask(String value) {
+    print(value);
     setState(() {
       _taskList = [..._taskList, value];
+      _displayAddTaskPanel = false;
     });
   }
 
   void _deleteTask(String value) {
     setState(() {
       _taskList = _taskList.where((task) => task != value).toList();
+    });
+  }
+
+  void _displayAddPanel() {
+    setState(() {
+      _displayAddTaskPanel = true;
+    });
+  }
+
+  void _setTask(String value) {
+    setState(() {
+      _newTask = value;
     });
   }
 
@@ -86,6 +101,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 tasks: _taskList,
                 addTaskFunction: _addTask,
                 deleteTaskFunction: _deleteTask,
+                showAddTaskFunction: _displayAddPanel,
+                newTask: _newTask,
+                displayAddTask: _displayAddTaskPanel,
+                setTask: _setTask,
               ),
             ]),
       ),
