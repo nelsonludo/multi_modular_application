@@ -29,7 +29,10 @@ class MyToDoList extends StatelessWidget {
               Text(task),
               ElevatedButton(
                   onPressed: () => deleteTaskFunction(task),
-                  child: Text("Delete"))
+                  child: Text("Delete")),
+              ElevatedButton(
+                  onPressed: () => deleteTaskFunction(task),
+                  child: Text("Edit"))
             ]);
           }),
           displayAddTask

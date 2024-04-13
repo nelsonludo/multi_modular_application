@@ -35,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String _page = "Home";
   String _newTask = "";
   bool _displayAddTaskPanel = false;
+  bool _showEditTask = false;
   var _taskList = ["Change the light bulbs", "beat my meat"];
 
   void _displayPage(String value) {
@@ -43,11 +44,29 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _displayEditTask() {
+    setState(() {
+      _showEditTask = true;
+    });
+  }
+
   void _addTask(String value) {
     print(value);
     setState(() {
       _taskList = [..._taskList, value];
       _displayAddTaskPanel = false;
+    });
+  }
+
+  void _editTask(String currentTask, String value) {
+    setState(() {
+      _taskList = [
+        ..._taskList.map((task) {
+          if (task == currentTask) {
+            return value;
+          }
+        })
+      ];
     });
   }
 
