@@ -64,6 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ..._taskList.map((task) {
           if (task == currentTask) {
             return value;
+          } else {
+            return task;
           }
         })
       ];
