@@ -9,6 +9,8 @@ class MyToDoList extends StatelessWidget {
   final String newTask;
   final Function setTask;
   final Function updateTask;
+  final void Function()? showEditTaskFunction;
+  final bool showEditTask;
 
   MyToDoList(
       {required this.tasks,
@@ -18,7 +20,9 @@ class MyToDoList extends StatelessWidget {
       required this.displayAddTask,
       required this.newTask,
       required this.setTask,
-      required this.updateTask});
+      required this.updateTask,
+      required this.showEditTaskFunction,
+      required this.showEditTask});
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +31,36 @@ class MyToDoList extends StatelessWidget {
         children: [
           Text("To Do List"),
           ...(tasks as List<String>).map((task) {
-            return Row(children: [
-              Text(task),
-              ElevatedButton(
-                  onPressed: () => deleteTaskFunction(task),
-                  child: Text("Delete")),
-              ElevatedButton(
-                  onPressed: () => deleteTaskFunction(task),
-                  child: Text("Edit"))
-            ]);
+            TextEditingController _textEditingController =
+                TextEditingController(text: task);
+            var newTaskValue = "";
+            return showEditTask
+                ? Container(
+                    width: 400,
+                    color: Colors.blue,
+                    child: Row(children: [
+                      TextField(
+                          decoration: InputDecoration(
+                              filled: true, fillColor: Colors.red),
+                          controller: _textEditingController,
+                          onChanged: (text) {
+                            newTaskValue = text;
+                          }),
+                      ElevatedButton(
+                          onPressed: () => updateTask(task, newTaskValue),
+                          child: Text("Edit Task"))
+                    ]))
+                : Container(
+                    width: 400,
+                    color: Colors.yellow,
+                    child: Row(children: [
+                      Text(task),
+                      ElevatedButton(
+                          onPressed: () => deleteTaskFunction(task),
+                          child: Text("Delete")),
+                      ElevatedButton(
+                          onPressed: showEditTaskFunction, child: Text("Edit"))
+                    ]));
           }),
           displayAddTask
               ? Column(children: [

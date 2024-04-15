@@ -51,7 +51,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _addTask(String value) {
-    print(value);
     setState(() {
       _taskList = [..._taskList, value];
       _displayAddTaskPanel = false;
@@ -127,6 +126,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 displayAddTask: _displayAddTaskPanel,
                 setTask: _setTask,
                 updateTask: _editTask,
+                showEditTaskFunction: _displayEditTask,
+                showEditTask: _showEditTask,
               ),
             ]),
       ),
