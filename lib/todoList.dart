@@ -63,23 +63,27 @@ class MyToDoList extends StatelessWidget {
                     ]));
           }),
           displayAddTask
-              ? Column(children: [
-                  TextField(
-                    onChanged: (text) {
-                      setTask(text);
-                    },
-                  ),
-                  FloatingActionButton(
-                    onPressed: () => addTaskFunction(newTask),
-                    tooltip: 'Add',
-                    child: Text("Add"),
-                  )
-                ])
-              : FloatingActionButton(
-                  onPressed: showAddTaskFunction,
-                  tooltip: 'Add Task',
-                  child: Text("Add Task"),
-                )
+              ? Container(
+                  width: 400,
+                  child: Column(children: [
+                    TextField(
+                      onChanged: (text) {
+                        setTask(text);
+                      },
+                    ),
+                    FloatingActionButton(
+                      onPressed: () => addTaskFunction(newTask),
+                      tooltip: 'Add',
+                      child: Text("Add"),
+                    )
+                  ]))
+              : Container(
+                  width: 400,
+                  child: FloatingActionButton(
+                    onPressed: showAddTaskFunction,
+                    tooltip: 'Add Task',
+                    child: Text("Add Task"),
+                  ))
         ],
       ),
     );
