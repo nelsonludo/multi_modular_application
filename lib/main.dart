@@ -126,6 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 newTask: _newTask,
                 displayAddTask: _displayAddTaskPanel,
                 setTask: _setTask,
+                updateTask: _editTask,
               ),
             ]),
       ),

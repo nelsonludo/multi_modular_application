@@ -8,6 +8,7 @@ class MyToDoList extends StatelessWidget {
   final bool displayAddTask;
   final String newTask;
   final Function setTask;
+  final Function updateTask;
 
   MyToDoList(
       {required this.tasks,
@@ -16,7 +17,8 @@ class MyToDoList extends StatelessWidget {
       required this.showAddTaskFunction,
       required this.displayAddTask,
       required this.newTask,
-      required this.setTask});
+      required this.setTask,
+      required this.updateTask});
 
   @override
   Widget build(BuildContext context) {
