@@ -11,6 +11,7 @@ class MyToDoList extends StatelessWidget {
   final Function updateTask;
   final void Function()? showEditTaskFunction;
   final bool showEditTask;
+  late TextEditingController controller;
 
   MyToDoList(
       {required this.tasks,
@@ -22,34 +23,33 @@ class MyToDoList extends StatelessWidget {
       required this.setTask,
       required this.updateTask,
       required this.showEditTaskFunction,
-      required this.showEditTask});
+      required this.showEditTask,
+      required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Text("To Do List"),
-          ...(tasks as List<String>).map((task) {
-            TextEditingController _textEditingController =
-                TextEditingController(text: task);
-            var newTaskValue = "";
+          const Text("To Do List"),
+          ...(tasks).map((task) {
             return showEditTask
                 ? Container(
                     width: 400,
                     color: Colors.blue,
                     child: Row(children: [
                       TextField(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               filled: true, fillColor: Colors.red),
-                          controller: _textEditingController,
-                          onChanged: (text) {
-                            newTaskValue = text;
-                          }),
-                      ElevatedButton(
-                          onPressed: () => updateTask(task, newTaskValue),
-                          child: Text("Edit Task"))
-                    ]))
+                          controller: controller,
+                          onSubmitted: (String value) =>
+                              updateTask(task, controller.text)),
+                      const SizedBox(
+                        height: 20,
+                      )
+                    ]),
+                  )
                 : Container(
                     width: 400,
                     color: Colors.yellow,
@@ -57,9 +57,10 @@ class MyToDoList extends StatelessWidget {
                       Text(task),
                       ElevatedButton(
                           onPressed: () => deleteTaskFunction(task),
-                          child: Text("Delete")),
+                          child: const Text("Delete")),
                       ElevatedButton(
-                          onPressed: showEditTaskFunction, child: Text("Edit"))
+                          onPressed: showEditTaskFunction,
+                          child: const Text("Edit"))
                     ]));
           }),
           displayAddTask
@@ -74,7 +75,7 @@ class MyToDoList extends StatelessWidget {
                     FloatingActionButton(
                       onPressed: () => addTaskFunction(newTask),
                       tooltip: 'Add',
-                      child: Text("Add"),
+                      child: const Text("Add"),
                     )
                   ]))
               : Container(
@@ -82,7 +83,7 @@ class MyToDoList extends StatelessWidget {
                   child: FloatingActionButton(
                     onPressed: showAddTaskFunction,
                     tooltip: 'Add Task',
-                    child: Text("Add Task"),
+                    child: const Text("Add Task"),
                   ))
         ],
       ),

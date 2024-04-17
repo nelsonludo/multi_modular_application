@@ -37,6 +37,19 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _displayAddTaskPanel = false;
   bool _showEditTask = false;
   var _taskList = ["Change the light bulbs", "beat my meat"];
+  late TextEditingController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   void _displayPage(String value) {
     setState(() {
@@ -128,6 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 updateTask: _editTask,
                 showEditTaskFunction: _displayEditTask,
                 showEditTask: _showEditTask,
+                controller: controller,
               ),
             ]),
       ),
