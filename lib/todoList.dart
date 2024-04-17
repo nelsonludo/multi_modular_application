@@ -13,18 +13,19 @@ class MyToDoList extends StatelessWidget {
   final bool showEditTask;
   late TextEditingController controller;
 
-  MyToDoList(
-      {required this.tasks,
-      required this.addTaskFunction,
-      required this.deleteTaskFunction,
-      required this.showAddTaskFunction,
-      required this.displayAddTask,
-      required this.newTask,
-      required this.setTask,
-      required this.updateTask,
-      required this.showEditTaskFunction,
-      required this.showEditTask,
-      required this.controller});
+  MyToDoList({
+    required this.tasks,
+    required this.addTaskFunction,
+    required this.deleteTaskFunction,
+    required this.showAddTaskFunction,
+    required this.displayAddTask,
+    required this.newTask,
+    required this.setTask,
+    required this.updateTask,
+    required this.showEditTaskFunction,
+    required this.showEditTask,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +41,14 @@ class MyToDoList extends StatelessWidget {
                     color: Colors.blue,
                     child: Row(children: [
                       TextField(
-                          decoration: const InputDecoration(
-                              filled: true, fillColor: Colors.red),
-                          controller: controller,
-                          onSubmitted: (String value) =>
-                              updateTask(task, controller.text)),
+                        decoration: const InputDecoration(
+                          filled: true,
+                          fillColor: Colors.red,
+                        ),
+                        controller: controller,
+                        onSubmitted: (String value) =>
+                            updateTask(task, controller.text),
+                      ),
                       const SizedBox(
                         height: 20,
                       )
@@ -56,12 +60,15 @@ class MyToDoList extends StatelessWidget {
                     child: Row(children: [
                       Text(task),
                       ElevatedButton(
-                          onPressed: () => deleteTaskFunction(task),
-                          child: const Text("Delete")),
+                        onPressed: () => deleteTaskFunction(task),
+                        child: const Text("Delete"),
+                      ),
                       ElevatedButton(
-                          onPressed: showEditTaskFunction,
-                          child: const Text("Edit"))
-                    ]));
+                        onPressed: showEditTaskFunction,
+                        child: const Text("Edit"),
+                      )
+                    ]),
+                  );
           }),
           displayAddTask
               ? Container(
@@ -77,14 +84,16 @@ class MyToDoList extends StatelessWidget {
                       tooltip: 'Add',
                       child: const Text("Add"),
                     )
-                  ]))
+                  ]),
+                )
               : Container(
                   width: 400,
                   child: FloatingActionButton(
                     onPressed: showAddTaskFunction,
                     tooltip: 'Add Task',
                     child: const Text("Add Task"),
-                  ))
+                  ),
+                ),
         ],
       ),
     );
