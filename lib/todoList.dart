@@ -5,27 +5,30 @@ class MyToDoList extends StatelessWidget {
   final Function addTaskFunction;
   final Function deleteTaskFunction;
   final void Function()? showAddTaskFunction;
+  final void Function()? unsetEditTask;
   final bool displayAddTask;
   final String newTask;
   final Function setTask;
   final Function updateTask;
-  final void Function()? showEditTaskFunction;
+  final Function showEditTaskFunction;
   final bool showEditTask;
   late TextEditingController controller;
+  final String editedTask;
 
-  MyToDoList({
-    required this.tasks,
-    required this.addTaskFunction,
-    required this.deleteTaskFunction,
-    required this.showAddTaskFunction,
-    required this.displayAddTask,
-    required this.newTask,
-    required this.setTask,
-    required this.updateTask,
-    required this.showEditTaskFunction,
-    required this.showEditTask,
-    required this.controller,
-  });
+  MyToDoList(
+      {required this.tasks,
+      required this.addTaskFunction,
+      required this.deleteTaskFunction,
+      required this.showAddTaskFunction,
+      required this.displayAddTask,
+      required this.newTask,
+      required this.setTask,
+      required this.updateTask,
+      required this.showEditTaskFunction,
+      required this.showEditTask,
+      required this.controller,
+      required this.editedTask,
+      required this.unsetEditTask});
 
   @override
   Widget build(BuildContext context) {
@@ -35,24 +38,18 @@ class MyToDoList extends StatelessWidget {
         children: [
           const Text("To Do List"),
           ...(tasks).map((task) {
-            return showEditTask
+            return editedTask == task && showEditTask
                 ? Container(
                     width: 400,
                     color: Colors.blue,
-                    child: Row(children: [
-                      TextField(
+                    child: TextField(
                         decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.red,
                         ),
                         controller: controller,
                         onSubmitted: (String value) =>
-                            updateTask(task, controller.text),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      )
-                    ]),
+                            {updateTask(task, controller.text), unsetEditTask}),
                   )
                 : Container(
                     width: 400,
@@ -64,7 +61,7 @@ class MyToDoList extends StatelessWidget {
                         child: const Text("Delete"),
                       ),
                       ElevatedButton(
-                        onPressed: showEditTaskFunction,
+                        onPressed: () => showEditTaskFunction(task),
                         child: const Text("Edit"),
                       )
                     ]),

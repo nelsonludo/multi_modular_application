@@ -34,6 +34,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String _page = "Home";
   String _newTask = "";
+  String _editedTask = "";
   bool _displayAddTaskPanel = false;
   bool _showEditTask = false;
   var _taskList = ["Change the light bulbs", "beat my meat"];
@@ -57,9 +58,10 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _displayEditTask() {
+  void _displayEditTask(String taskToEdit) {
     setState(() {
       _showEditTask = true;
+      _editedTask = taskToEdit;
     });
   }
 
@@ -102,6 +104,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _unsetEditedTask() {
+    setState(() {
+      _showEditTask = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,18 +139,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               MyToDoList(
-                tasks: _taskList,
-                addTaskFunction: _addTask,
-                deleteTaskFunction: _deleteTask,
-                showAddTaskFunction: _displayAddPanel,
-                newTask: _newTask,
-                displayAddTask: _displayAddTaskPanel,
-                setTask: _setTask,
-                updateTask: _editTask,
-                showEditTaskFunction: _displayEditTask,
-                showEditTask: _showEditTask,
-                controller: controller,
-              ),
+                  tasks: _taskList,
+                  addTaskFunction: _addTask,
+                  deleteTaskFunction: _deleteTask,
+                  showAddTaskFunction: _displayAddPanel,
+                  newTask: _newTask,
+                  displayAddTask: _displayAddTaskPanel,
+                  setTask: _setTask,
+                  updateTask: _editTask,
+                  showEditTaskFunction: _displayEditTask,
+                  showEditTask: _showEditTask,
+                  controller: controller,
+                  unsetEditTask: _unsetEditedTask,
+                  editedTask: _editedTask),
             ]),
       ),
     );
