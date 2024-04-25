@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyToDoList extends StatelessWidget {
+class MyToDoList extends StatefulWidget {
   final List<String> tasks;
   final Function addTaskFunction;
   final Function deleteTaskFunction;
@@ -16,6 +16,55 @@ class MyToDoList extends StatelessWidget {
   final String editedTask;
 
   MyToDoList(
+      {required this.tasks,
+      required this.addTaskFunction,
+      required this.deleteTaskFunction,
+      required this.showAddTaskFunction,
+      required this.displayAddTask,
+      required this.newTask,
+      required this.setTask,
+      required this.updateTask,
+      required this.showEditTaskFunction,
+      required this.showEditTask,
+      required this.controller,
+      required this.editedTask,
+      required this.unsetEditTask});
+
+  @override
+  State<StatefulWidget> createState() {
+    return MyToDoListState(
+        tasks: tasks,
+        addTaskFunction: addTaskFunction,
+        deleteTaskFunction: deleteTaskFunction,
+        showAddTaskFunction: showAddTaskFunction,
+        newTask: newTask,
+        displayAddTask: displayAddTask,
+        setTask: setTask,
+        updateTask: updateTask,
+        showEditTaskFunction: showEditTaskFunction,
+        showEditTask: showEditTask,
+        controller: controller,
+        unsetEditTask: unsetEditTask,
+        editedTask: editedTask);
+  }
+}
+
+class MyToDoListState extends State<MyToDoList> {
+  final List<String> tasks;
+  final Function addTaskFunction;
+  final Function deleteTaskFunction;
+  final void Function()? showAddTaskFunction;
+  final void Function()? unsetEditTask;
+  final bool displayAddTask;
+  final String newTask;
+  final Function setTask;
+  final Function updateTask;
+  final Function showEditTaskFunction;
+  final bool showEditTask;
+  late TextEditingController controller;
+  final String editedTask;
+
+  MyToDoListState(
       {required this.tasks,
       required this.addTaskFunction,
       required this.deleteTaskFunction,
